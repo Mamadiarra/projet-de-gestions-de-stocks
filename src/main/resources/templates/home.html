@@ -8,12 +8,11 @@
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
 
     <title>Application de démo gestion des stocks</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"-->
     <link rel="stylesheet" href="css/mycustomstyle.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Start Bloc Menu principale -->
+    <div>
         <div class="sidebar">
             <div class="sidebar-header">
                 <div>
@@ -25,7 +24,7 @@
                 <ul class="nav nav-sidebar">
                     <li class="nav-label"><label class="content-label">Menus principales</label></li>
                     <li class="nav-item">
-                        <a href="dashboard.html" class="nav-link">
+                        <a th:href="@{/}" class="nav-link">
                             <i data-feather="box"></i> Liste des produits
                         </a>
                     </li>
@@ -45,7 +44,7 @@
                     </div>
                 </div>
 
-                <div class="header-right">
+                <!--div class="header-right">
                     <a href="#" class="header-help-link"><i data-feather="help-circle"></i></a>
                     <div class="dropdown dropdown-notification">
                         <a href="#" class="dropdown-link new" data-toggle="dropdown"><i data-feather="bell"></i></a>
@@ -53,7 +52,7 @@
                             <div class="dropdown-menu-header">
                                 <h6>Notifications</h6>
                                 <a href="#"><i data-feather="more-vertical"></i></a>
-                            </div><!-- dropdown-menu-header -->
+                            </div>
                             <div class="dropdown-menu-body">
                                 <a href="#" class="dropdown-item">
                                     <div class="avatar"><span class="avatar-initial rounded-circle text-primary bg-primary-light">s</span></div>
@@ -83,29 +82,29 @@
                                         <span>2 days ago</span>
                                     </div>
                                 </a>
-                            </div><!-- dropdown-menu-body -->
+                            </div>
                             <div class="dropdown-menu-footer">
                                 <a href="#">View All Notifications</a>
                             </div>
-                        </div><!-- dropdown-menu -->
+                        </div>
                     </div>
                     <div class="dropdown dropdown-loggeduser">
                         <a href="#" class="dropdown-link" data-toggle="dropdown">
                             <div class="avatar avatar-sm">
                                 <img src="../assets/img/img1.jpg" class="rounded-circle" alt="">
-                            </div><!-- avatar -->
+                            </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="dropdown-menu-header">
                                 <div class="media align-items-center">
                                     <div class="avatar">
                                         <img src="../assets/img/img1.jpg" class="rounded-circle" alt="">
-                                    </div><!-- avatar -->
+                                    </div>
                                     <div class="media-body mg-l-10">
                                         <h6>Louise Kate Lumaad</h6>
                                         <span>Administrator</span>
                                     </div>
-                                </div><!-- media -->
+                                </div>
                             </div>
                             <div class="dropdown-menu-body">
                                 <a href="#" class="dropdown-item"><i data-feather="user"></i> View Profile</a>
@@ -114,9 +113,9 @@
                                 <a href="#" class="dropdown-item"><i data-feather="shield"></i> Privacy Settings</a>
                                 <a href="#" class="dropdown-item"><i data-feather="log-out"></i> Sign Out</a>
                             </div>
-                        </div><!-- dropdown-menu -->
+                        </div>
                     </div>
-                </div><!-- header-right -->
+                </div-->
             </div>
             <!-- End Header -->
 
@@ -132,8 +131,11 @@
                     <h4 class="content-title">Liste des produits</h4>
                 </div>
                 <div class="d-none d-sm-flex">
-                    <a href="add-product.html" class="btn btn-brand-01 mg-l-5">
-                        <i data-feather="plus" class="svg-14"></i> Ajouter un produit
+                    <a  th:href="@{/add-product}" class="btn btn-brand-01 mg-l-5">
+                        <i data-feather="plus" class="svg-14"></i> Ajouter un produit (1)
+                    </a>
+                    <a  th:href="@{/add-product-handling}" class="btn btn-brand-01 mg-l-5">
+                        <i data-feather="plus" class="svg-14"></i> Ajouter un produit (2)
                     </a>
                 </div>
             </div>
@@ -152,15 +154,16 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>#PROD001</td>
+                            <td>#PROD0001</td>
                             <td>Premier produit</td>
                             <td>5000</td>
-                            <td>La description du produit</td>
+                            <td>La description du produit numéro 001</td>
                             <td>
                                 <div class="dropdown">
                                     <a href="#" class="link-gray-500" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical svg-16">
-                                            <circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle>
+                                            <circle cx="12" cy="12" r="1"></circle>
+                                            <circle cx="12" cy="5" r="1"></circle>
                                             <circle cx="12" cy="19" r="1"></circle>
                                         </svg>
                                     </a>
@@ -181,7 +184,4 @@
         </div>
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </html>

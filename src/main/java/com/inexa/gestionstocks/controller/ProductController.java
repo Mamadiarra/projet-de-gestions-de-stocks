@@ -18,12 +18,4 @@ public class ProductController {
         log.info("Call home page");
         return "home";
     }
-
-    @GetMapping("/toto")
-    public String myProduct(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        log.info("Call product page");
-        return "myproduct";
-    }
-
 }
