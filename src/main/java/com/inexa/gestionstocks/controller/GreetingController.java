@@ -1,6 +1,6 @@
 package com.inexa.gestionstocks.controller;
 
-import com.inexa.gestionstocks.Form.Product;
+import com.inexa.gestionstocks.Form.ProductBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +13,12 @@ public class GreetingController {
     @GetMapping("/add-product-handling")
     public String productHandlingForm(Model model)
     {
-        model.addAttribute("product", new Product());
+        model.addAttribute("product", new ProductBean());
         return "myhandlingproduct";
     }
 
     @PostMapping("/add-product-handling")
-    public String greetingSubmit(@ModelAttribute Product product) {
+    public String greetingSubmit(@ModelAttribute ProductBean product) {
         return "handlingresult";
     }
 

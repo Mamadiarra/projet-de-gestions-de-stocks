@@ -49,5 +49,4 @@
         **trace** Affiche les informations plus détaillées sur le flux du système.
         
  ***5 - Mettre les logs dans un fichier***   
- 
-  d          
+           

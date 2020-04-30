@@ -1,0 +1,6 @@
+com.inexa.gestionstocks
+com.inexa.gestionstocks.Form
+com.inexa.gestionstocks.controller
+com.inexa.gestionstocks.model
+com.inexa.gestionstocks.repository
+com.inexa.gestionstocks.service

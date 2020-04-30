@@ -1,6 +1,6 @@
 package com.inexa.gestionstocks.Form;
 
-public class Product {
+public class ProductBean {
 
     private String numberProduct;
 

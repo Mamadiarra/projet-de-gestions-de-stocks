@@ -1,37 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Application de démo gestion des stocks">
-    <meta name="author" content="ThemePixels">
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
-
-    <title>Application de démo gestion des stocks</title>
-    <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"-->
-    <link rel="stylesheet" href="css/mycustomstyle.css">
-</head>
+<head th:replace="fragments/header::headerlink"></head>
 <body>
 <div>
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <div>
-                <a href="" class="sidebar-logo"><span>GestionStocks</span></a>
-                <small class="sidebar-logo-headline">Application de gestion des stocks</small>
-            </div>
-        </div>
-        <div id="dpSidebarBody" class="sidebar-body">
-            <ul class="nav nav-sidebar">
-                <li class="nav-label"><label class="content-label">Menus principales</label></li>
-                <li class="nav-item">
-                    <a th:href="@{/}" class="nav-link">
-                        <i data-feather="box"></i> Liste des produits
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- End Bloc Menu principale -->
+    <div th:replace="fragments/header::header"></div>
 
     <div class="content content-page">
         <!-- Start Header -->
@@ -67,22 +39,22 @@
                         <div class="d-md-flex mg-b-30">
                             <div class="form-group mg-b-0">
                                 <label>Numéro du produit: <span class="tx-danger">*</span></label>
-                                <input type="text" th:field="*{numberProduct}" class="form-control" style="width: 320px" placeholder="Entrer le numéro du produit">
-                                <ul class="parsley-errors-list filled" id="parsley-id-5" th:if="${#fields.hasErrors('numberProduct')}" th:errors="*{numberProduct}">
+                                <input type="text" th:field="*{numberProduct}" class="form-control" style="width: 320px; margin-right: 10px" placeholder="Entrer le numéro du produit">
+                                <ul style="color: red" class="parsley-errors-list filled" id="parsley-id-5" th:if="${#fields.hasErrors('numberProduct')}" th:errors="*{numberProduct}">
                                     <li class="parsley-required"></li>
                                 </ul>
                             </div><!-- form-group -->
                             <div class="form-group mg-b-0 mg-md-l-20 mg-t-20 mg-md-t-0">
                                 <label>Libellé du produit: <span class="tx-danger">*</span></label>
-                                <input type="text" th:field="*{name}" class="form-control" style="width: 320px" placeholder="Entrer le libellé du produit">
-                                <ul class="parsley-errors-list filled" id="parsley-id-5" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                                <input type="text" th:field="*{name}" class="form-control" style="width: 320px; margin-right: 10px" placeholder="Entrer le libellé du produit">
+                                <ul style="color: red" class="parsley-errors-list filled" id="parsley-id-5" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
                                     <li class="parsley-required"></li>
                                 </ul>
                             </div><!-- form-group -->
                             <div class="form-group mg-b-0 mg-md-l-20 mg-t-20 mg-md-t-0">
                                 <label>Prix unitaire: <span class="tx-danger">*</span></label>
                                 <input type="text" th:field="*{price}" class="form-control" style="width: 320px" placeholder="Entrer le prix unitaire du produit">
-                                <ul class="parsley-errors-list filled" id="parsley-id-5" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">
+                                <ul style="color: red" class="parsley-errors-list filled" id="parsley-id-5" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">
                                     <li class="parsley-required"></li>
                                 </ul>
                             </div><!-- form-group -->
@@ -91,7 +63,7 @@
                             <div class="form-group mg-b-0">
                                 <label>Description du produit: <span class="tx-danger">*</span></label>
                                 <textarea th:field="*{description}" class="form-control" placeholder="Entrer la description du produit" rows="6" style="width: 1000px"></textarea>
-                                <ul class="parsley-errors-list filled" id="parsley-id-5" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+                                <ul style="color: red" class="parsley-errors-list filled" id="parsley-id-5" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
                                     <li class="parsley-required"></li>
                                 </ul>
                             </div>
@@ -105,5 +77,6 @@
         <!-- End Content -->
     </div>
 </div>
+<div th:replace="fragments/header::footerscript"></div>
 </body>
 </html>
