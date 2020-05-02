@@ -34,26 +34,30 @@
         <div class="content-body">
 
             <div class="card card-body pd-lg-25">
-                <form action="#" th:action="@{/add-product}" th:object="${productForm}" method="post">
+                <form action="#" th:action="@{/add-product}" th:object="${productForm}" method="POST" enctype="multipart/form-data">
                     <div style="margin: auto">
                         <div class="d-md-flex mg-b-30">
                             <div class="form-group mg-b-0">
                                 <label>Numéro du produit: <span class="tx-danger">*</span></label>
-                                <input type="text" th:field="*{numberProduct}" class="form-control" style="width: 320px; margin-right: 10px" placeholder="Entrer le numéro du produit">
+                                <input type="text" th:field="*{numberProduct}" class="form-control" style="width: 220px; margin-right: 10px" placeholder="Entrer le numéro du produit">
                                 <ul style="color: red" class="parsley-errors-list filled" id="parsley-id-5" th:if="${#fields.hasErrors('numberProduct')}" th:errors="*{numberProduct}">
                                     <li class="parsley-required"></li>
                                 </ul>
                             </div><!-- form-group -->
                             <div class="form-group mg-b-0 mg-md-l-20 mg-t-20 mg-md-t-0">
+                                <label>Image: <span class="tx-danger">*</span></label>
+                                <input type="file" name="fileImage" required class="form-control" style="width: 220px; margin-right: 10px">
+                            </div><!-- form-group -->
+                            <div class="form-group mg-b-0 mg-md-l-20 mg-t-20 mg-md-t-0">
                                 <label>Libellé du produit: <span class="tx-danger">*</span></label>
-                                <input type="text" th:field="*{name}" class="form-control" style="width: 320px; margin-right: 10px" placeholder="Entrer le libellé du produit">
+                                <input type="text" th:field="*{name}" class="form-control" style="width: 220px; margin-right: 10px" placeholder="Entrer le libellé du produit">
                                 <ul style="color: red" class="parsley-errors-list filled" id="parsley-id-5" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
                                     <li class="parsley-required"></li>
                                 </ul>
                             </div><!-- form-group -->
                             <div class="form-group mg-b-0 mg-md-l-20 mg-t-20 mg-md-t-0">
                                 <label>Prix unitaire: <span class="tx-danger">*</span></label>
-                                <input type="text" th:field="*{price}" class="form-control" style="width: 320px" placeholder="Entrer le prix unitaire du produit">
+                                <input type="text" th:field="*{price}" class="form-control" style="width: 220px" placeholder="Entrer le prix unitaire du produit">
                                 <ul style="color: red" class="parsley-errors-list filled" id="parsley-id-5" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">
                                     <li class="parsley-required"></li>
                                 </ul>

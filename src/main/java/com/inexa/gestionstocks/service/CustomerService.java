@@ -12,5 +12,9 @@ public interface CustomerService {
 
     public void deleteById(Long id);
 
-    public Customer findByName(String name);
+    public List<Customer> findByName(String name);
+
+    public Customer findById (Long id);
+
+    public List<Customer> findAllMultiplesFields(String name, String phone, String email, String location);
 }

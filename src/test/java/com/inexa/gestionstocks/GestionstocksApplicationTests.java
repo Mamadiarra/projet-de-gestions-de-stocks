@@ -48,8 +48,6 @@ class GestionstocksApplicationTests {
 
 		customer.setPhone("09876543");
 
-		customer.setFileName("file.jpg");
-
 		defaultService.addCustomer(customer);
 
 		int customerNumber = defaultService.listCustomer().size();

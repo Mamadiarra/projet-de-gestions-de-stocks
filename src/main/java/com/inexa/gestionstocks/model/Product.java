@@ -33,6 +33,8 @@ public class Product {
     @Size(min=20, max=500)
     private String description;
 
+    private String fileName;
+
     public String getNumberProduct() {
         return numberProduct;
     }
@@ -63,5 +65,13 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

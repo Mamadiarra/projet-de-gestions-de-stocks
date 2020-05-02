@@ -25,9 +25,6 @@ public class CustomerForm {
     @Size(min = 5, max = 190)
     private String location;
 
-    @NotNull
-    private String fileName;
-
     public String getName() {
         return name;
     }
@@ -58,13 +55,5 @@ public class CustomerForm {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
     }
 }

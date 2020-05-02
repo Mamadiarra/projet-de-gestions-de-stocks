@@ -4,8 +4,10 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
+@Table(name="customer")
 public class Customer {
 
     @Id
@@ -30,8 +32,8 @@ public class Customer {
     @Size(min = 5, max = 190)
     private String location;
 
-    @NotNull
-    private String fileName;
+    @OneToMany(mappedBy = "customer")
+    private Set<Address> addresses;
 
     public Long getId()
     {
@@ -72,13 +74,5 @@ public class Customer {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
     }
 }

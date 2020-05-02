@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -21,11 +23,15 @@ import javax.validation.Valid;
 @Controller
 public class WebController implements WebMvcConfigurer {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
     // Voici comment instancier un Logger
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    public WebController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -44,11 +50,20 @@ public class WebController implements WebMvcConfigurer {
     }
 
     @PostMapping("/add-product")
-    public String checkProductInfo(@Valid ProductForm productForm, BindingResult bindingResult) {
+    public String checkProductInfo(@Valid ProductForm productForm, @RequestParam("fileImage") MultipartFile fileImage, BindingResult bindingResult) {
         log.info("Check product information method");
 
         if (bindingResult.hasErrors()) {
             return "myproduct";
+        }
+
+        String fileName = null;
+
+        try {
+            fileName = productService.storeFileOnDisk(fileImage);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("error to save image", e);
         }
 
         Product product = new Product();
@@ -61,9 +76,12 @@ public class WebController implements WebMvcConfigurer {
 
         product.setDescription(productForm.getDescription());
 
+        product.setFileName(fileName);
+
         productService.addProduct(product);
 
         return "redirect:/productresults";
+
     }
 
 }

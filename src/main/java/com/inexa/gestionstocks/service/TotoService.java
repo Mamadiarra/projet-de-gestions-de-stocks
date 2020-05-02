@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("totoService")
-public class TotoService implements CustomerService {
+public class TotoService /*implements CustomerService*/ {
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -28,10 +29,13 @@ public class TotoService implements CustomerService {
         customerRepository.deleteById(id);
     }
 
-    @Override
-    public Customer findByName(String name) {
+    public List<Customer> findByName(String name) {
         //return customerRepository.findByNameContainingIgnoreCase(name);
         return null;
+    }
+
+    public Optional<Customer> findById(Long id) {
+        return Optional.empty();
     }
 
 }

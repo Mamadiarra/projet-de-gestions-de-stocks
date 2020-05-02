@@ -13,11 +13,10 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Tableau de bord</a></li>
-                        <li class="breadcrumb-item">Liste des produits</li>
-                        <li class="breadcrumb-item active" aria-current="page">Création de produit</li>
+                        <li class="breadcrumb-item active" aria-current="page">Liste des clients</li>
                     </ol>
                 </nav>
-                <h4 class="content-title">Formulaire de création de produits</h4>
+                <h4 class="content-title">Formulaire de recherche des clients</h4>
             </div>
         </div>
         <div class="content-body">
@@ -28,6 +27,32 @@
                         <div class="form-group mg-b-0">
                             <label>Nom complet du client: <span class="tx-danger">*</span></label>
                             <input type="text" name="name" class="form-control" required style="width: 220px; margin-right: 10px" placeholder="Rechercher un client par nom">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-dark pd-x-20">Recherche le client</button>
+                </div>
+            </form>
+
+            <div style="font-size: 20px; text-align:center; margin: 20px">Recherche par champs multiple</div>
+
+            <form action="#" th:action="@{/search-customer-field}" method="post">
+                <div style="margin: auto">
+                    <div class="d-md-flex mg-b-30">
+                        <div class="form-group mg-b-0">
+                            <label>Recherche par nom: <span class="tx-danger">*</span></label>
+                            <input type="text" name="name" class="form-control" style="width: 220px; margin-right: 10px" placeholder="Rechercher un client par nom">
+                        </div>
+                        <div class="form-group mg-b-0">
+                            <label>Recherche par contact: <span class="tx-danger">*</span></label>
+                            <input type="text" name="phone" class="form-control" style="width: 220px; margin-right: 10px" placeholder="Rechercher un client par contact">
+                        </div>
+                        <div class="form-group mg-b-0">
+                            <label>Recherche par email: <span class="tx-danger">*</span></label>
+                            <input type="text" name="email" class="form-control" style="width: 220px; margin-right: 10px" placeholder="Rechercher un client par email">
+                        </div>
+                        <div class="form-group mg-b-0">
+                            <label>Recherche par localisation: <span class="tx-danger">*</span></label>
+                            <input type="text" name="location" class="form-control" style="width: 220px; margin-right: 10px" placeholder="Rechercher un client par localisation">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-dark pd-x-20">Recherche le client</button>

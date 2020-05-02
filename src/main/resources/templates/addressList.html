@@ -24,38 +24,37 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Tableau de bord</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Liste des clients</li>
+                        <li class="breadcrumb-item active" aria-current="page" th:text="${'Liste des adresse du client ' + customer.id}"></li>
                     </ol>
                 </nav>
-                <h4 class="content-title">Liste des clients</h4>
+                <h4 class="content-title" th:text="${'Liste des adresse du client ' + customer.name}"></h4>
             </div>
             <div class="d-none d-sm-flex">
-                <a th:href="@{/add-customer}" class="btn btn-brand-01 mg-l-5">
-                    <i data-feather="plus" class="svg-14"></i> Ajouter un client
+                <a th:href="@{/add-address/{id}(id=${customer.id})}" class="btn btn-brand-01 mg-l-5">
+                    <i data-feather="plus" class="svg-14"></i> Ajouter une adresse
                 </a>
             </div>
         </div>
         <div class="content-body">
 
+            <div th:replace="fragments/formMessage::formMessage"></div>
+
             <div class="component-section" style="margin-top: 0px">
                 <table id="example1" class="table">
                     <thead>
                     <tr>
-                        <th class="wd-15p">Nom complet</th>
-                        <th class="wd-20p">Contact</th>
-                        <th class="wd-15p">Email</th>
-                        <th class="wd-35p">Localisation</th>
+                        <th class="wd-15p">Libellé</th>
+                        <th class="wd-20p">Ville</th>
+                        <th class="wd-15p">Adresse</th>
                         <th class="wd-15p">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="customer: ${customers}">
-                        <td th:text="${customer.name}"/>
-                        <td th:text="${customer.phone}"/>
-                        <td th:text="${customer.email}"/>
-                        <td th:text="${customer.location}"/>
+                    <tr th:each="address: ${addresses}">
+                        <td th:text="${address.addressName}"/>
+                        <td th:text="${address.addressCity}"/>
+                        <td th:text="${address.addressLocation}"/>
                         <td>
-                            <!--a class="dropdown-item" th:href="@{/delete-customer/{id}(id=${customer.id})}">Supprimer le client</a-->
                             <div class="dropdown">
                                 <a href="#" class="link-gray-500" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical svg-16">
@@ -66,9 +65,8 @@
                                 </a>
                                 <div class="dropdown-menu tx-14">
                                     <h6 class="dropdown-header tx-uppercase tx-11 tx-bold tx-inverse tx-spacing-1">Options</h6>
-                                    <!--a class="dropdown-item" href="#">Modifier le client</a-->
-                                    <a class="dropdown-item" th:href="@{/customer-address/{id}(id=${customer.id})}">Adresses du client</a>
-                                    <a class="dropdown-item" th:href="@{/delete-customer/{id}(id=${customer.id})}">Supprimer le client</a>
+                                    <!--a class="dropdown-item" th:href="@{/update-address/{id}(id=${address.id})}">Modifier</a-->
+                                    <a class="dropdown-item" th:href="@{/delete-address/{id}(id=${address.id})}">Supprimer</a>
                                 </div>
                             </div>
                         </td>

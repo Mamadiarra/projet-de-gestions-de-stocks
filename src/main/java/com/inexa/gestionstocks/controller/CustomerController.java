@@ -36,7 +36,7 @@ public class CustomerController implements WebMvcConfigurer {
     /**
      *
      * @param model
-     * @return
+     * @return la liste des clients;
      */
     @GetMapping("/customers")
     public String listCustomer(Model model)
@@ -46,12 +46,24 @@ public class CustomerController implements WebMvcConfigurer {
         return "customers";
     }
 
+    /**
+     *
+     * @param customerForm retourne un objet contenant les informations du client à enregistré dans le formulaire
+     * @param principal affiche les informations de l'utilisateur connecté
+     * @return un formulaire d'ajout des clients
+     */
     @GetMapping("/add-customer")
     public String showForm(CustomerForm customerForm, Principal principal) {
         log.debug("L'utilisateur connecté est :" + principal.getName());
         return "addcustomer";
     }
 
+    /**
+     *
+     * @param customerForm retourne un objet contenant les informations du client à enregistré dans le formulaire
+     * @param bindingResult
+     * @return
+     */
     @PostMapping("/add-customer")
     public String storeCustomerInfo(@Valid CustomerForm customerForm, BindingResult bindingResult) {
 
@@ -91,9 +103,30 @@ public class CustomerController implements WebMvcConfigurer {
     @PostMapping("/search-customer")
     public String searchCustomer(String name, Model model) {
 
-        Customer customers = defaultService.findByName(name);
+        List<Customer> customers = defaultService.findByName(name);
 
-        model.addAttribute("result", customers);
+        model.addAttribute("customers", customers);
+
+        return "searchResults";
+    }
+
+    /**
+     *
+     * @param name fait référence au nom du client
+     * @param phone fait référence au contact du client
+     * @param email fait référence à l'email du client
+     * @param location fait référence à la localisation du client
+     * @param model
+     * @return une page de resultat avec la liste des clients trouvés
+     */
+    @PostMapping("/search-customer-field")
+    public String searchCustomerWithMultiplesFields(@RequestParam(required = false) String name,@RequestParam(required = false) String phone,@RequestParam(required = false) String email,@RequestParam(required = false) String location, Model model) {
+
+        log.info("Search with multiple field");
+
+        List<Customer> customers = defaultService.findAllMultiplesFields(name, phone, email, location);
+
+        model.addAttribute("customers", customers);
 
         return "searchResults";
     }

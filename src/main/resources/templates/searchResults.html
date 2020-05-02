@@ -23,36 +23,28 @@
         </div>
         <div class="content-body">
 
-            <div class="component-section no-code" th:each="">
-                <h5 id="section1" class="tx-semibold">Résultat</h5>
-
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <strong>Nom du client:</strong>
-                        <span th:text="${result.name}"/>
-                    </li>
-                </ul>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <strong>Contact du client:</strong>
-                        <span th:text="${result.phone}"/>
-                    </li>
-                </ul>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <strong>Email du client:</strong>
-                        <span th:text="${result.email}"/>
-                    </li>
-                </ul>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <strong>Localisation du client:</strong>
-                        <span th:text="${result.location}"/>
-                    </li>
-                </ul>
+            <div class="component-section" style="margin-top: 0px" th:if="${!customers.isEmpty()}">
+                <h3>Résultat de la recherche</h3>
+                <table id="example1" class="table">
+                    <thead>
+                    <tr>
+                        <th class="wd-15p">Nom du client</th>
+                        <th class="wd-15p">Contact du client</th>
+                        <th class="wd-20p">Email du client</th>
+                        <th class="wd-15p">Localisation du client</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="result : ${customers}">
+                        <td th:text="${result.name}" ></td>
+                        <td th:text="${result.phone}"></td>
+                        <td th:text="${result.email}"></td>
+                        <td th:text="${result.location}"></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <div th:unless="${result}"> Not found </div>
+            <div th:unless="${!customers.isEmpty()}" class="alert alert-warning"> Data Not found </div>
 
         </div>
         <!-- End Content -->
