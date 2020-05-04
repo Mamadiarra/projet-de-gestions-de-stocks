@@ -40,11 +40,13 @@ class GestionstocksApplicationTests {
 
 		Customer customer = new Customer();
 
-		customer.setName("Diarra Mamadou");
+		int number = customers.size() + 1;
 
-		customer.setEmail("Test2@gmail.com");
+		customer.setName("Diarra Mamadou"+number);
 
-		customer.setLocation("Location ");
+		customer.setEmail("Test"+number+"@gmail.com");
+
+		customer.setLocation("Location"+number);
 
 		customer.setPhone("09876543");
 

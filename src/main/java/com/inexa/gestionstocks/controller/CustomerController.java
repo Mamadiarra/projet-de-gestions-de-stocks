@@ -34,7 +34,7 @@ public class CustomerController implements WebMvcConfigurer {
     */
 
     /**
-     *
+     * Cette méthode affiche la liste des clients
      * @param model
      * @return la liste des clients;
      */
@@ -47,7 +47,7 @@ public class CustomerController implements WebMvcConfigurer {
     }
 
     /**
-     *
+     * Cette méthode affiche un formulaire d'ajout de client
      * @param customerForm retourne un objet contenant les informations du client à enregistré dans le formulaire
      * @param principal affiche les informations de l'utilisateur connecté
      * @return un formulaire d'ajout des clients
@@ -59,7 +59,7 @@ public class CustomerController implements WebMvcConfigurer {
     }
 
     /**
-     *
+     * Cette méthode valide et enregistre un client en base de données
      * @param customerForm retourne un objet contenant les informations du client à enregistré dans le formulaire
      * @param bindingResult
      * @return
@@ -86,6 +86,12 @@ public class CustomerController implements WebMvcConfigurer {
         return "redirect:/customers";
     }
 
+    /**
+     * Cette méthode supprime un client en base de données
+     * @param id est l'identifiant du client à supprimer
+     * @param model
+     * @return la liste des clients qui sont en base de données
+     */
     @GetMapping("/delete-customer/{id}")
     public String deleteCustomer(@PathVariable("id") long id, Model model)
     {
@@ -94,12 +100,22 @@ public class CustomerController implements WebMvcConfigurer {
         return "redirect:/customers";
     }
 
+    /**
+     * Cette méthode affiche le formulaire de recherche par nom des clients.
+     * @return un formulaire de recherche de clients par nom
+     */
     @GetMapping("/search-customer")
     public String searchCustomer() {
 
         return "searchForm";
     }
 
+    /**
+     * Cette méthode valide le formulaire de recherche et affiche le resultat
+     * @param name correspond à la valeur du champs à saisir
+     * @param model
+     * @return la liste des clients trouvés
+     */
     @PostMapping("/search-customer")
     public String searchCustomer(String name, Model model) {
 
