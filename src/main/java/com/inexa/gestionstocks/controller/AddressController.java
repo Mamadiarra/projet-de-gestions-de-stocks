@@ -106,6 +106,7 @@ public class AddressController {
         addressService.addAddress(address);
 
         redirectAttributes.addFlashAttribute("success", "true");
+
         return "redirect:/customer-address/" + id;
     }
 

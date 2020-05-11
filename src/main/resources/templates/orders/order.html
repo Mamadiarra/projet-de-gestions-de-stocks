@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header::headerlink"></head>
+<body>
+    <div>
+        <div th:replace="fragments/header::header"></div>
+        <!-- End Bloc Menu principale -->
+
+        <div class="content content-page">
+            <!-- Start Header -->
+            <div class="header">
+                <div class="header-left">
+                    <a href="#" class="burger-menu"><i data-feather="menu"></i></a>
+                    <div class="header-search">
+                        <i data-feather="search"></i>
+                        <input type="search" class="form-control" placeholder="What are you looking for?">
+                    </div>
+                </div>
+            </div>
+            <!-- End Header -->
+
+            <!-- Start Content -->
+            <div class="content-header justify-content-between">
+                <div>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Tableau de bord</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Liste des commmandes</li>
+                        </ol>
+                    </nav>
+                    <h4 class="content-title">Liste des commmandes</h4>
+                </div>
+                <div class="d-none d-sm-flex">
+                    <a  th:href="@{/add-order/{id}(id=${customer.id})}" class="btn btn-brand-01 mg-l-5">
+                        <i data-feather="plus" class="svg-14"></i> Ajouter une commande
+                    </a>
+                </div>
+            </div>
+            <div class="content-body">
+
+                <span th:if="${addSuccess}">
+                    <div class="alert alert-success" th:text="${'Commande ajoutée avec succès !'}"></div>
+                </span>
+
+                <div class="component-section" style="margin-top: 0px">
+                    <table id="example1" class="table">
+                        <thead>
+                        <tr>
+                            <th class="wd-15p">N° commande</th>
+                            <th class="wd-20p">Produit</th>
+                            <th class="wd-15p">Date commande</th>
+                            <th class="wd-20p">Quantité</th>
+                            <th class="wd-15p">Statut</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="order: ${customer.orders}">
+                                <td th:text="${order.orderNumber}"></td>
+                                <td th:text="${order.product.name}"></td>
+                                <td th:text="${order.orderDate}"></td>
+                                <td th:text="${order.quantity}"></td>
+                                <td th:if="${order.status == 1}" th:text="${'En attente de validation'}"></td>
+                                <td th:if="${order.status == 2}" th:text="${'Validé'}"></td>
+                                <td th:if="${order.status == 3}" th:text="${'Annulé'}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- End Content -->
+        </div>
+    </div>
+</body>
+</html>

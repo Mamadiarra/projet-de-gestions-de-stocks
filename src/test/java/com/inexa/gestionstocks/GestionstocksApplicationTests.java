@@ -18,7 +18,7 @@ class GestionstocksApplicationTests {
 
 	@Autowired
 	public CustomerService defaultService;
-
+	/*
 	@Test
 	void test_get_all_customers()
 	{
@@ -56,5 +56,5 @@ class GestionstocksApplicationTests {
 
 		//assertThat(customers).hasSize(customerNumber);
 	}
-
+	*/
 }

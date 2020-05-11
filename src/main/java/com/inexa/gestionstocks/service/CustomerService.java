@@ -1,6 +1,8 @@
 package com.inexa.gestionstocks.service;
 
 import com.inexa.gestionstocks.model.Customer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -8,7 +10,9 @@ public interface CustomerService {
 
     public void addCustomer (Customer customer);
 
-    public List<Customer> listCustomer();
+    public Page<Customer> listCustomerWithPagination(Pageable pageable);
+
+    public List<Customer> listCustomerForClientDatatable();
 
     public void deleteById(Long id);
 

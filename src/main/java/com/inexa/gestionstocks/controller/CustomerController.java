@@ -1,11 +1,15 @@
 package com.inexa.gestionstocks.controller;
 
 import com.inexa.gestionstocks.Form.CustomerForm;
+import com.inexa.gestionstocks.Form.SendingForm;
+
 import com.inexa.gestionstocks.model.Customer;
 import com.inexa.gestionstocks.service.CustomerService;
+import com.inexa.gestionstocks.service.EmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
@@ -26,6 +31,9 @@ public class CustomerController implements WebMvcConfigurer {
 
     @Autowired
     private CustomerService defaultService;
+
+    @Autowired
+    private EmailService emailService;
     /*
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -39,9 +47,22 @@ public class CustomerController implements WebMvcConfigurer {
      * @return la liste des clients;
      */
     @GetMapping("/customers")
-    public String listCustomer(Model model)
+    public String listCustomer(HttpServletRequest request, Model model)
     {
-        model.addAttribute("customers", defaultService.listCustomer());
+        model.addAttribute("customersForDatatable", defaultService.listCustomerForClientDatatable());
+
+        int page = 0;
+        int size = 5;
+
+        if (request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
+            page = Integer.parseInt(request.getParameter("page")) - 1;
+        }
+
+        if (request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
+            size = Integer.parseInt(request.getParameter("size"));
+        }
+
+        model.addAttribute("customers", defaultService.listCustomerWithPagination(PageRequest.of(page, size)));
 
         return "customers";
     }
@@ -145,5 +166,27 @@ public class CustomerController implements WebMvcConfigurer {
         model.addAttribute("customers", customers);
 
         return "searchResults";
+    }
+
+    @GetMapping("/send-email-customer/{id}")
+    public String showSendingForm(@PathVariable("id") long id, SendingForm sendingForm, Model model)
+    {
+        model.addAttribute("customerId", id);
+
+        return "showSendingForm";
+    }
+    
+    @PostMapping("/send-email-customer/{id}")
+    public String sendingForm(@PathVariable("id") long id, @Valid SendingForm sendingForm, BindingResult bindingResult)
+    {
+        if (bindingResult.hasErrors()) {
+            return "showSendingForm";
+        }
+
+        Customer customer = defaultService.findById(id);
+
+        emailService.sendSimpleMessage(customer.getEmail(), sendingForm.getSubject(), sendingForm.getDescription());
+
+        return "redirect:/customers";
     }
 }

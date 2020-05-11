@@ -1,18 +1,14 @@
 package com.inexa.gestionstocks.Form;
 
-import javax.persistence.Lob;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 public class ProductForm {
 
     @NotNull
-    @Size(min=2, max=30)
     private String numberProduct;
 
     @NotNull
-    @Size(min=10, max=50)
     private String name;
 
     @NotNull
@@ -20,7 +16,6 @@ public class ProductForm {
     private Integer price;
 
     @NotNull
-    @Size(min=20, max=500)
     private String description;
 
     public String getNumberProduct() {

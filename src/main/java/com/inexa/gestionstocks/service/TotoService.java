@@ -21,7 +21,7 @@ public class TotoService /*implements CustomerService*/ {
 
     public List<Customer> listCustomer()
     {
-        return customerRepository.findAll();
+        return (List<Customer>) customerRepository.findAll();
     }
 
     public void deleteById(Long id)

@@ -1,5 +1,7 @@
 package com.inexa.gestionstocks.model;
 
+import java.util.Set;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -34,6 +36,18 @@ public class Product {
     private String description;
 
     private String fileName;
+
+    @OneToMany(mappedBy = "product")
+    private Set<Order> commandes;
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNumberProduct() {
         return numberProduct;

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header::headerlink"></head>
+<body>
+<div>
+    <div th:replace="fragments/header::header"></div>
+
+    <div class="content content-page">
+        <!-- Start Header -->
+        <div th:replace="fragments/header::headerSearch"></div>
+        <!-- End Header -->
+
+        <!-- Start Content -->
+        <div class="content-header justify-content-between">
+            <div>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Tableau de bord</a></li>
+                        <li class="breadcrumb-item">Liste des commandes</li>
+                        <li class="breadcrumb-item active" aria-current="page">Création d'ajout de commandes</li>
+                    </ol>
+                </nav>
+                <h4 class="content-title">Formulaire d'ajout de commandes</h4>
+            </div>
+        </div>
+        <div class="content-body">
+
+            <div class="card card-body pd-lg-25">
+                <form th:action="@{/add-order/{id}(id=${customerId})}" th:object="${orderForm}" method="post">
+                    <div style="margin: auto">
+                        <div class="d-md-flex mg-b-30">
+                            <div class="form-group mg-b-0">
+                                <label>Liste des produits: <span class="tx-danger">*</span></label>
+                                <div class="wd-md-50p">
+                                    <select th:field="*{productId}" class="custom-select" style="width: 340px; margin-right: 10px">
+                                        <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+                                    </select>
+                                </div>
+                                <span style="color: red;width: 210px;padding-left: 10px;" th:if="${#fields.hasErrors('productId')}" th:errors="*{productId}"></span>
+                            </div>
+                            <div class="form-group mg-b-0 mg-md-l-20 mg-t-20 mg-md-t-0">
+                                <label>Quantité du produit: <span class="tx-danger">*</span></label>
+                                <input type="text" th:field="*{quantity}" class="form-control" style="width: 340px; margin-right: 10px" placeholder="Entrer la quantité du produit">
+                                <span style="color: red;width: 210px;padding-left: 10px;" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-dark pd-x-20">Enregistré la commande</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!-- End Content -->
+    </div>
+</div>
+<div th:replace="fragments/header::footerscript"></div>
+</body>
+</html>

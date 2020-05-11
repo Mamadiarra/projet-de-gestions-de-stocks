@@ -34,6 +34,9 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private Set<Address> addresses;
+    
+    @OneToMany(mappedBy = "customer")
+    private Set<Order> orders;
 
     public Long getId()
     {
@@ -74,5 +77,21 @@ public class Customer {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
     }
 }

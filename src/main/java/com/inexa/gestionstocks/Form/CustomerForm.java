@@ -1,8 +1,5 @@
 package com.inexa.gestionstocks.Form;
 
-import javax.persistence.Column;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -17,7 +14,6 @@ public class CustomerForm {
     private String phone;
 
     @NotNull
-    @Email
     @Size(min = 10, max = 190)
     private String email;
 

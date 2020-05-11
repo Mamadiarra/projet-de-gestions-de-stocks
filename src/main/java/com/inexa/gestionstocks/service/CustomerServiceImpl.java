@@ -4,6 +4,8 @@ import com.inexa.gestionstocks.exception.CustomerNotFoundException;
 import com.inexa.gestionstocks.model.Customer;
 import com.inexa.gestionstocks.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +21,13 @@ public class CustomerServiceImpl implements CustomerService{
         customerRepository.save(customer);
     }
 
-    public List<Customer> listCustomer()
+    public Page<Customer> listCustomerWithPagination(Pageable pageable)
     {
+        return customerRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Customer> listCustomerForClientDatatable() {
         return customerRepository.findAll();
     }
 
