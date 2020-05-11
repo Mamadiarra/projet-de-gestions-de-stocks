@@ -34,17 +34,12 @@ public class CustomerController implements WebMvcConfigurer {
 
     @Autowired
     private EmailService emailService;
-    /*
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/customers").setViewName("customers");
-    }
-    */
 
     /**
      * Cette méthode affiche la liste des clients
+     * @param request est le paramètre qui sera utilisé pour la pagination
      * @param model
-     * @return la liste des clients;
+     * @return la liste des clients avec un paramètre de pagination (page);
      */
     @GetMapping("/customers")
     public String listCustomer(HttpServletRequest request, Model model)
@@ -88,21 +83,36 @@ public class CustomerController implements WebMvcConfigurer {
     @PostMapping("/add-customer")
     public String storeCustomerInfo(@Valid CustomerForm customerForm, BindingResult bindingResult) {
 
+        log.info("Fonction de verification et d'insertion des clients");
+
         if (bindingResult.hasErrors()) {
+            log.info("Retour sur le formulaire avec des messages d'erreurs");
             return "addcustomer";
         }
 
-        Customer customer = new Customer();
+        try {
 
-        customer.setName(customerForm.getName());
+            log.info("Debut d'insertion des clients");
 
-        customer.setEmail(customerForm.getEmail());
+            Customer customer = new Customer();
 
-        customer.setPhone(customerForm.getPhone());
+            customer.setName(customerForm.getName());
 
-        customer.setLocation(customerForm.getLocation());
+            customer.setEmail(customerForm.getEmail());
 
-        defaultService.addCustomer(customer);
+            customer.setPhone(customerForm.getPhone());
+
+            customer.setLocation(customerForm.getLocation());
+
+            defaultService.addCustomer(customer);
+
+            log.info("Fin d'insertion des clients");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            log.error("Impossible to store customer", e);
+        }
 
         return "redirect:/customers";
     }
@@ -116,7 +126,19 @@ public class CustomerController implements WebMvcConfigurer {
     @GetMapping("/delete-customer/{id}")
     public String deleteCustomer(@PathVariable("id") long id, Model model)
     {
-        defaultService.deleteById(id);
+        log.info("Fonction de suppression de client");
+
+        try {
+            log.info("Debut de suppression du client");
+
+            defaultService.deleteById(id);
+
+            log.info("Fin de suppression du client");
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            log.error("Impossible de supprimer le client", e);
+        }
 
         return "redirect:/customers";
     }
@@ -168,6 +190,13 @@ public class CustomerController implements WebMvcConfigurer {
         return "searchResults";
     }
 
+    /**
+     * Cette fonction envoie un mail à un client
+     * @param id du client qui recevra le mail
+     * @param sendingForm est un object qui contient toutes les informations à remplir dans le formulaire
+     * @param model
+     * @return le formulaire d'envoie de mail
+     */
     @GetMapping("/send-email-customer/{id}")
     public String showSendingForm(@PathVariable("id") long id, SendingForm sendingForm, Model model)
     {
@@ -175,17 +204,36 @@ public class CustomerController implements WebMvcConfigurer {
 
         return "showSendingForm";
     }
-    
+
+    /**
+     * Cette fonction verifie le formulaire d'envoie de mail et envoie un mail
+     * @param id du client qui recevra le mail
+     * @param sendingForm les paramètres du formulaire
+     * @param bindingResult
+     * @return la liste des clients après avoir reçu le mail.
+     */
     @PostMapping("/send-email-customer/{id}")
     public String sendingForm(@PathVariable("id") long id, @Valid SendingForm sendingForm, BindingResult bindingResult)
     {
+        log.info("Fonction d'envoi d'email");
+
         if (bindingResult.hasErrors()) {
+            log.info("Retour sur le formulaire avec des messages d'erreurs");
+
             return "showSendingForm";
         }
 
-        Customer customer = defaultService.findById(id);
+        try {
 
-        emailService.sendSimpleMessage(customer.getEmail(), sendingForm.getSubject(), sendingForm.getDescription());
+            Customer customer = defaultService.findById(id);
+
+            emailService.sendSimpleMessage(customer.getEmail(), sendingForm.getSubject(), sendingForm.getDescription());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            log.error("Impossible d'envoyer un mail au client", e);
+        }
 
         return "redirect:/customers";
     }

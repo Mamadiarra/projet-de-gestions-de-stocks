@@ -19,6 +19,11 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    /**
+     * Cette fonction affiche la liste des produits
+     * @param model
+     * @return la page dédiée aux produits
+     */
     @GetMapping("/")
     public String home(Model model) {
 

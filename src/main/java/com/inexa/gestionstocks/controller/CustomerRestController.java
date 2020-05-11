@@ -14,6 +14,10 @@ public class CustomerRestController {
     @Autowired
     private CustomerService defaultService;
 
+    /**
+     * Cette fonction retourne la liste des clients en format JSON
+     * @return
+     */
     @GetMapping("/list-customer-side-server")
     public List<Customer> getAllCustomerRest()
     {

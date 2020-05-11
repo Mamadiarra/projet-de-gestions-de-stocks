@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class GreetingController {
-
+    /**
+     * Cette fonction affiche la page dédiée aux produits
+     * @param model
+     * @return la page des produits
+     */
     @GetMapping("/add-product-handling")
     public String productHandlingForm(Model model)
     {

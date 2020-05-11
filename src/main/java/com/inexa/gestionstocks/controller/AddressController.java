@@ -86,30 +86,48 @@ public class AddressController {
         Customer customer = defaultService.findById(id);
 
         if (bindingResult.hasErrors()) {
-            log.info("Show form error message");
+            log.info("Show form  with error message");
 
             model.addAttribute("customer", customer);
 
             return "addressForm";
         }
 
-        Address address = new Address();
+        try {
 
-        address.setAddressCity(addressForm.getAddressCity());
+            log.info("Starting Store address");
 
-        address.setAddressLocation(addressForm.getAddressLocation());
+            Address address = new Address();
+    
+            address.setAddressCity(addressForm.getAddressCity());
+    
+            address.setAddressLocation(addressForm.getAddressLocation());
+    
+            address.setAddressName(addressForm.getAddressName());
+    
+            address.setCustomer(customer);
+    
+            addressService.addAddress(address);
 
-        address.setAddressName(addressForm.getAddressName());
-
-        address.setCustomer(customer);
-
-        addressService.addAddress(address);
+            log.info("End Store address");
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("Impossible to store address", e);
+        }
 
         redirectAttributes.addFlashAttribute("success", "true");
 
         return "redirect:/customer-address/" + id;
     }
 
+    /**
+     *
+     * @param id de l'adresse à supprimer
+     * @param model
+     * @param redirectAttributes
+     * @return la liste des adresses d'un client
+     */
     @GetMapping("/delete-address/{id}")
     public String deleteAddress(@PathVariable("id") long id, Model model, RedirectAttributes redirectAttributes)
     {
@@ -117,7 +135,12 @@ public class AddressController {
 
         Optional<Address> address = addressService.findById(id);
 
-        addressService.deleteById(id);
+        try {
+            addressService.deleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("Impossible to delete address", e);
+        }
 
         redirectAttributes.addFlashAttribute("deleteSuccess", "true");
 

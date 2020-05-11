@@ -1,7 +1,9 @@
 com.inexa.gestionstocks
 com.inexa.gestionstocks.Form
+com.inexa.gestionstocks.configuration
 com.inexa.gestionstocks.controller
 com.inexa.gestionstocks.exception
+com.inexa.gestionstocks.handler
 com.inexa.gestionstocks.model
 com.inexa.gestionstocks.repository
 com.inexa.gestionstocks.service
