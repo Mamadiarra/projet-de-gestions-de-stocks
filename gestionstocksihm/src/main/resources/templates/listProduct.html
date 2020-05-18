@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header::headerlink"></head>
+<body>
+    <div>
+        <div th:replace="fragments/header::header"></div>
+        <!-- End Bloc Menu principale -->
+
+        <div class="content content-page">
+            <!-- Start Header -->
+            <div class="header">
+                <div class="header-left">
+                    <a href="#" class="burger-menu"><i data-feather="menu"></i></a>
+                    <div class="header-search">
+                        <i data-feather="search"></i>
+                        <input type="search" class="form-control" placeholder="What are you looking for?">
+                    </div>
+                </div>
+            </div>
+            <!-- End Header -->
+
+            <!-- Start Content -->
+            <div class="content-header justify-content-between">
+                <div>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Tableau de bord</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Liste des produits</li>
+                        </ol>
+                    </nav>
+                    <h4 class="content-title">Liste des produits</h4>
+                </div>
+                <div class="d-none d-sm-flex">
+                    <a  th:href="@{/add-product}" class="btn btn-brand-01 mg-l-5">
+                        <i data-feather="plus" class="svg-14"></i> Ajouter un produit
+                    </a>
+                </div>
+            </div>
+            <div class="content-body">
+
+                <div class="component-section" style="margin-top: 0px">
+                    <table id="example1" class="table">
+                        <thead>
+                        <tr>
+                            <th class="wd-15p">Numéro du produit</th>
+                            <th class="wd-20p">Libellé</th>
+                            <th class="wd-15p">Prix unitaire</th>
+                            <th class="wd-35p">Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="product: ${products}">
+                            <td th:text="${product.numberProduct}" />
+                            <td th:text="${product.name}"/>
+                            <td th:text="${product.price}"/>
+                            <td th:text="${product.description}"/>
+                        </tr>
+                        <tr th:if="${products.empty}">
+                            <td colspan="4">
+                                <div class="alert alert-danger"> Aucun produit disponible </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- End Content -->
+        </div>
+    </div>
+</body>
+</html>

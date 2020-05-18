@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:fragment="formMessage">
+
+        <span th:if="${deleteSuccess}">
+            <div class="alert alert-success" th:text="${'Adresse supprimée avec success'}"></div>
+        </span>
+
+        <span th:if="${success}">
+            <div class="alert alert-success" th:text="${'Adresse enregistré avec succès pour ce client'}"></div>
+        </span>
+
+    </div>
+</body>
+</html>
